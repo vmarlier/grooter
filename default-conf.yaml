@@ -1,0 +1,8 @@
+---
+routers:
+  - matcher: "/toto"
+    middleware: ""
+    method: "HTTP"
+    destination:
+      - kind: "url"
+        target: "http://www.testingmcafeesites.com/testcat_ac.html"
