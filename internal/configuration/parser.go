@@ -11,7 +11,7 @@ func ParseConfigs(file string) (c Config, err error) {
 	yaml.Unmarshal(conf, &c)
 
 	if err := c.Validate(); err != nil {
-		return Config{}, errors.New("Configuration is not valid")
+		return Config{}, errors.New("Configuration is not valid - "+err.Error())
 	}
 
 	return c, nil

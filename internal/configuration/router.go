@@ -6,11 +6,11 @@ import (
 )
 
 type Router struct {
-	Matcher    string
-	Target     Target
-	Scheme     Scheme
-	Method     Method
-	Middleware string
+	Matcher     string
+	Destination Destination
+	Scheme      Scheme
+	Method      Method
+	Middleware  string
 }
 
 type Scheme string
@@ -32,7 +32,7 @@ func (r *Router) Validate() error {
 		return err
 	}
 
-	if err := r.Target.validateTarget(); err != nil {
+	if err := r.Destination.Validate(); err != nil {
 		return err
 	}
 

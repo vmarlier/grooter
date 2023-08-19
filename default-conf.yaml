@@ -2,7 +2,8 @@
 routers:
   - matcher: "/toto"
     middleware: ""
-    method: "HTTP"
+    scheme: "HTTP"
+    method: "GET"
     destination:
-      - kind: "url"
-        target: "http://www.testingmcafeesites.com/testcat_ac.html"
+      kind: "URL"
+      target: "http://www.testingmcafeesites.com/testcat_ac.html"

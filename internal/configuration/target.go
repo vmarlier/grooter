@@ -1,11 +1,11 @@
 package configuration
 
 import (
-    "errors"
-    "net/url"
+	"errors"
+	"net/url"
 )
 
-type Target struct {
+type Destination struct {
 	Kind   Kind
 	Target string
 }
@@ -17,40 +17,40 @@ const (
 	kubeService Kind = "kubeService"
 )
 
-func (t *Target) Validate() error {
-    if err := t.validateKind(); err != nil {
-        return err
-    }
+func (d *Destination) Validate() error {
+	if err := d.validateKind(); err != nil {
+		return err
+	}
 
-    if err := t.validateTarget(); err != nil {
-        return err
-    }
+	if err := d.validateTarget(); err != nil {
+		return err
+	}
 
-    return nil
+	return nil
 }
 
-func (t *Target) validateKind() error {
-	validTargets := []string{"URL", "kubeService"}
+func (d *Destination) validateKind() error {
+	validKinds := []string{"URL", "kubeService"}
 
-	for _, target := range validTargets {
+	for _, kind := range validKinds {
 
-		if string(t.Target) == target {
+		if string(d.Kind) == kind {
 			return nil
 		}
 
 	}
 
-	return errors.New("invalid Method value")
+	return errors.New("invalid Kind value")
 }
 
-func (t *Target) validateTarget() error {
-    if t.Kind == "URL" {
-        _, err := url.Parse(t.Target)
+func (d *Destination) validateTarget() error {
+	if d.Target == "URL" {
+		_, err := url.Parse(d.Target)
 
-        if err != nil {
-            return errors.New("invalid Target value: not a valid URL path")
-        }
-    }
+		if err != nil {
+			return errors.New("invalid Target value: not a valid URL path")
+		}
+	}
 
-    return nil
+	return nil
 }
